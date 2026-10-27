@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Ateliê KkumaStore</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">
+      <span><img src="https://res.cloudinary.com/iqxfjivr/image/upload/c_scale,w_70/v1792780523/Ursinho_de_croch%C3%AA_com_cora%C3%A7%C3%A3o_rosa_fhme1l.png" alt=""></span>
+      <div>
+        <h1>Ateliê Kkuma Store</h1>
+        <p>Feito à mão com carinho</p>
+      </div>
+    </div>
+
+    <nav>
+      <button class="nav-btn active" onclick="navegarPara('inicio')">
+        Início
+      </button>
+
+      <button class="nav-btn" onclick="navegarPara('catalogo')">
+        Catálogo
+      </button>
+
+      <button class="nav-btn" onclick="navegarPara('cadastro')">
+        Cadastrar peça
+      </button>
+    </nav>
+  </header>
+
+  <div class="aviso">
+    🌸 Artesanato feito à mão com amor
+  </div>
+
+  <main>
+
+    <!-- INÍCIO -->
+    <section id="inicio" class="secao active">
+
+      <div class="apresentacao">
+        <div>
+          <span class="etiqueta">Artesanato exclusivo</span>
+
+          <h2>Um pouco de carinho em cada ponto 💗</h2>
+
+          <p>
+            Bem-vindo ao Ateliê KkumaStore!
+            Criamos bolsas, amigurumis, roupas e
+            decorações feitas à mão.
+          </p>
+
+          <button class="btn" onclick="navegarPara('catalogo')">
+            Conhecer produtos
+          </button>
+        </div>
+
+        <img
+          src="https://res.cloudinary.com/iqxfjivr/image/upload/v1793033449/crochet_wdj1dc.jpg"
+          alt="Novelos de crochê"
+        >
+      </div>
+
+      <h2 class="titulo">Nossa essência</h2>
+
+      <div class="valores">
+
+        <article class="card">
+          <span>💗</span>
+          <h3>Missão</h3>
+          <p>
+            Criar peças artesanais bonitas,
+            úteis e feitas com carinho.
+          </p>
+        </article>
+
+        <article class="card">
+          <span>🌱</span>
+          <h3>Visão</h3>
+          <p>
+            Valorizar o artesanato e
+            incentivar o consumo consciente.
+          </p>
+        </article>
+
+        <article class="card">
+          <span>🧵</span>
+          <h3>Valores</h3>
+          <p>
+            Amor, criatividade, qualidade
+            e dedicação em cada peça.
+          </p>
+        </article>
+
+      </div>
+
+    </section>
+
+    <!-- CATÁLOGO -->
+    <section id="catalogo" class="secao">
+
+      <div class="cabecalho-secao">
+        <div>
+          <h2>Nosso catálogo 🧶</h2>
+          <p>Conheça nossas peças artesanais.</p>
+        </div>
+
+        <button class="btn btn-claro" onclick="carregarDadosAPI()">
+          Recarregar
+        </button>
+      </div>
+
+      <div class="filtros">
+
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Buscar produto..."
+          oninput="filtrarProdutos()"
+        >
+
+        <select id="categoryFilter" onchange="filtrarProdutos()">
+          <option value="todos">Todas as categorias</option>
+          <option value="Amigurumi">Amigurumi</option>
+          <option value="Acessórios">Acessórios / Bolsas</option>
+          <option value="Decoração">Decoração</option>
+          <option value="Vestuário">Vestuário</option>
+        </select>
+
+      </div>
+
+      <div id="loader">
+        Carregando produtos...
+      </div>
+
+      <div id="gridProdutos" class="produtos"></div>
+
+    </section>
+
+    <!-- CADASTRO -->
+    <section id="cadastro" class="secao">
+
+      <div class="formulario">
+
+        <h2>Cadastrar nova peça ✨</h2>
+
+        <p>
+          Preencha os campos para adicionar
+          um produto ao catálogo.
+        </p>
+
+        <div id="alertBox" class="alerta"></div>
+
+        <form id="formCroche" onsubmit="cadastrarProduto(event)">
+
+          <label for="nomePeca">Nome da peça</label>
+
+          <input
+            type="text"
+            id="nomePeca"
+            placeholder="Ex: Ursinho de crochê"
+            required
+          >
+
+          <label for="categoriaPeca">Categoria</label>
+
+          <select id="categoriaPeca" required>
+            <option value="">Selecione uma categoria</option>
+            <option value="Amigurumi">Amigurumi</option>
+            <option value="Acessórios">Acessórios / Bolsas</option>
+            <option value="Decoração">Decoração</option>
+            <option value="Vestuário">Vestuário</option>
+          </select>
+
+          <label for="precoPeca">Preço (R$)</label>
+
+          <input
+            type="number"
+            id="precoPeca"
+            min="0.01"
+            step="0.01"
+            placeholder="Ex: 85.00"
+            required
+          >
+
+          <label for="imagemPeca">Link da imagem</label>
+
+          <input
+            type="url"
+            id="imagemPeca"
+            placeholder="https://exemplo.com/imagem.jpg"
+            required
+          >
+
+          <label for="descricaoPeca">Descrição</label>
+
+          <textarea
+            id="descricaoPeca"
+            rows="4"
+            placeholder="Descreva sua peça..."
+            required
+          ></textarea>
+
+          <button type="submit" class="btn btn-publicar">
+            Cadastrar peça 💗
+          </button>
+
+        </form>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 Ateliê Fio & Afeto 🧶</p>
+    <p>Feito à mão com carinho</p>
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
